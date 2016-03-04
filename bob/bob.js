@@ -8,33 +8,48 @@
 var Bob = function() {};
 
 Bob.prototype.hey = function(input) {
-  if (input.isEmpty){
+  if (input.isEmpty()){
     return 'Fine. Be that way!';
-  } else if (input.isShouting) {
+  } else if (input.isShouting() && !input.isOnlyNumber()) {
     return 'Whoa, chill out!';
-  } else if (input.isQuestion) {
+  } else if (input.isQuestion()) {
     return "Sure.";
+  } else {
+    return "Whatever.";
   }
 };
 
-String.prototype.isEmpty = function(input) {
-  if (input.trim === "") {
+String.prototype.isEmpty = function() {
+  if (this.trim() === "") {
     return true;
   } else {
     return false;
   }
 };
 
-String.prototype.isShouting = function(input) {
-  if(!input.match(/a-z/) && input.trim !== "") {
+String.prototype.isOnlyNumber = function () {
+  var splitStrings = this.split(' ');
+  var isIt = false;
+  for (var i = 0; i < splitStrings.length; i++) {
+    if(!isNaN(parseInt(splitStrings[i]))){
+      isIt = true;
+    } else {
+      return false;
+    }
+  }
+  return isIt;
+};
+
+String.prototype.isShouting = function() {
+  if(this.toUpperCase() == this) {
     return true;
   } else {
     return false;
   }
 };
 
-String.prototype.isQuestion = function(input) {
-  if(input.charAt(-1) === '?') {
+String.prototype.isQuestion = function() {
+  if(this.charAt(this.length -1) === '?') {
     return true;
   } else {
     return false;
