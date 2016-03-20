@@ -1,8 +1,8 @@
-var Words = function() {};
+var Words = function() {}
 //Why is an empty object initialized? I've been doing this for
 // every challenge and I don't know why?
 Words.prototype.count = function(input) {
-  var words = input.split(" ");
+  var words = input.match(/\S+/g);
   var occurrences = {};
 
   for (var i = 0; i < words.length; i++) {
